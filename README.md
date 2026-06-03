@@ -24,8 +24,6 @@ The project compares three approaches:
 The project uses a subset of videos extracted from the provided dataset.
 
 ### Processing Pipeline
-## Project Pipeline
-
 ```mermaid
 flowchart TD
 
@@ -35,30 +33,33 @@ B --> C[Extract Middle Frame]
 B --> D[Extract Audio]
 B --> E[Sample 16 Video Frames]
 
-C --> F[CLIP Image Encoder]
-D --> G[MFCC Audio Encoder]
+C --> F[CLIP Encoder]
+D --> G[MFCC Encoder]
 E --> H[VideoMAE Encoder]
 
 F --> I[Image Embedding 512D]
 G --> J[Audio Embedding 128D]
 H --> K[Video Embedding 768D]
 
-I --> L[Feature Fusion]
+I --> L[Fusion Input]
 J --> L
 
-L --> M[MLP Fusion Baseline]
+L --> M[MLP Baseline]
 L --> N[Transformer Fusion]
+L --> O[Hybrid Transformer]
 
-M --> O[Predicted Video Embedding 768D]
-N --> P[Predicted Video Embedding 768D]
+M --> P[Predicted Video Embedding]
+N --> P
+O --> P
 
-O --> Q[Evaluation]
-P --> Q
+P --> Q[Evaluation]
 
-I --> R[ImageBind]
+K --> Q
+
+I --> R[ImageBind Baseline]
 J --> R
 
-R --> S[Zero-Shot Multimodal Embedding]
+R --> S[Zero Shot Multimodal Embedding]
 
 S --> Q
 
@@ -69,15 +70,14 @@ Q --> V[Computational Efficiency]
 T --> T1[MSE]
 T --> T2[Cosine Similarity]
 
-U --> U1[Recall@1]
-U --> U2[Recall@5]
-U --> U3[Recall@10]
+U --> U1[Recall at 1]
+U --> U2[Recall at 5]
+U --> U3[Recall at 10]
 U --> U4[Median Rank]
 
 V --> V1[Parameter Count]
 V --> V2[Inference Latency]
 ```
-
 For every video:
 
 #### Image Modality
