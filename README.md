@@ -403,5 +403,3 @@ Multimodal Video Representation Learning using
 Image, Audio and Video Embeddings
 (2026)
 ```
-
-> Note: Replace the placeholder metric values for MLP and Transformer-InfoNCE with your exact experimental outputs before publishing. The table structure is already publication-ready for GitHub and project submission.
