@@ -367,42 +367,6 @@ However, increasing the InfoNCE contribution beyond an optimal point reduced cos
 
 ---
 
-# Repository Structure
-
-```text
-multimodal_project/
-│
-├── dataset/
-│   ├── TrainValVideo/
-│   └── subset_videos/
-│
-├── frames/
-├── audio/
-│
-├── image_embeddings/
-├── audio_embeddings/
-├── video_embeddings/
-│
-├── imagebind_image_embeddings/
-├── imagebind_audio_embeddings/
-├── imagebind_video_embeddings/
-│
-├── checkpoints/
-│
-├── outputs/
-│   ├── common_samples.csv
-│   ├── dataset_index.csv
-│   ├── X.npy
-│   ├── Y.npy
-│   └── gamma_ablation.csv
-│
-├── notebooks/
-│
-└── README.md
-```
-
----
-
 # Technologies Used
 
 * Python
