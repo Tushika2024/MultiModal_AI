@@ -55,8 +55,8 @@ M --> O
 N --> O
 
 J --> P[Ground Truth Video Embedding]
-
 O --> Q[Evaluation]
+P --> Q
 
 %% ImageBind Baseline
 
@@ -87,6 +87,7 @@ Q --> AD[Recall at 10]
 Q --> AE[Median Rank]
 Q --> AF[Latency]
 Q --> AG[Parameter Count]
+Q --> AH[MSE]
 ```
 For every video:
 
