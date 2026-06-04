@@ -25,58 +25,68 @@ The project uses a subset of videos extracted from the provided dataset.
 
 ### Processing Pipeline
 ```mermaid
-flowchart TD
+flowchart LR
 
-A[Raw Video Dataset] --> B[Video Preprocessing]
+A[Video Dataset]
 
-B --> C[Extract Middle Frame]
-B --> D[Extract Audio]
-B --> E[Sample 16 Video Frames]
+A --> B[Middle Frame]
+A --> C[Audio]
+A --> D[Full Video]
 
-C --> F[CLIP Encoder]
-D --> G[MFCC Encoder]
-E --> H[VideoMAE Encoder]
+%% Proposed Method
 
-F --> I[Image Embedding 512D]
-G --> J[Audio Embedding 128D]
-H --> K[Video Embedding 768D]
+B --> E[CLIP]
+C --> F[MFCC]
+D --> G[VideoMAE]
 
-I --> L[Fusion Input]
-J --> L
+E --> H[512D Image Embedding]
+F --> I[128D Audio Embedding]
+G --> J[768D Video Embedding Target]
 
-L --> M[MLP Baseline]
-L --> N[Transformer Fusion]
-L --> O[Hybrid Transformer]
+H --> K[Fusion Models]
+I --> K
 
-M --> P[Predicted Video Embedding]
-N --> P
-O --> P
+K --> L[MLP Baseline]
+K --> M[Transformer InfoNCE]
+K --> N[Hybrid Transformer]
 
-P --> Q[Evaluation]
+L --> O[Predicted Video Embedding]
+M --> O
+N --> O
 
-K --> Q
+J --> P[Ground Truth Video Embedding]
 
-I --> R[ImageBind Baseline]
-J --> R
+O --> Q[Evaluation]
 
-R --> S[Zero Shot Multimodal Embedding]
+%% ImageBind Baseline
 
-S --> Q
+B --> R[ImageBind Vision Encoder]
+C --> S[ImageBind Audio Encoder]
+D --> T[ImageBind Video Encoder]
 
-Q --> T[Representation Quality]
-Q --> U[Retrieval Quality]
-Q --> V[Computational Efficiency]
+R --> U[ImageBind Image Embedding]
+S --> V[ImageBind Audio Embedding]
 
-T --> T1[MSE]
-T --> T2[Cosine Similarity]
+U --> W[Average Fusion]
+V --> W
 
-U --> U1[Recall at 1]
-U --> U2[Recall at 5]
-U --> U3[Recall at 10]
-U --> U4[Median Rank]
+T --> X[ImageBind Video Embedding]
 
-V --> V1[Parameter Count]
-V --> V2[Inference Latency]
+W --> Y[Zero Shot Retrieval]
+
+X --> Y
+
+Y --> Q
+
+%% Metrics
+
+Q --> AA[Cosine Similarity]
+Q --> AB[Recall at 1]
+Q --> AC[Recall at 5]
+Q --> AD[Recall at 10]
+Q --> AE[Median Rank]
+Q --> AF[Latency]
+Q --> AG[Parameter Count]
 ```
 For every video:
 
